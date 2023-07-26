@@ -33,6 +33,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+/**
+ * GET/
+ * VIEW POST
+ */
+
+router.get("/post/:id", async (req, res) => {
+  try {
+    const post = await Post.findById({ _id: req.params.id });
+    if (!post) return res.redirect("/"); // redirecting to home when id not found
+    const details = {
+      title: `${post.title}`,
+      description: "My personal blogging website!",
+    };
+    console.log(post);
+    res.render("post", { details, post });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 // router.get("/", async (req, res) => {
 //   try {
 //     const details = {
