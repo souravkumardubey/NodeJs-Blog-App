@@ -53,6 +53,33 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
+/**
+ * GET/
+ * Search Term
+ */
+
+router.post("/search", async (req, res) => {
+  const details = {
+    title: "Search",
+    description: "My personal blogging website!",
+  };
+  try {
+    const searchTerm = req.body.searchTerm;
+    // console.log(searchTerm);
+    const modifiedSearchTerm = searchTerm.replace(/[^a-zA-Z0-9 ]/g, "");
+    const blogs = await Post.find({
+      $or: [
+        { title: { $regex: new RegExp(modifiedSearchTerm, "i") } },
+        { body: { $regex: new RegExp(modifiedSearchTerm, "i") } },
+      ],
+    });
+    res.render("search", { details, blogs });
+    // res.send(searchTerm);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 // router.get("/", async (req, res) => {
 //   try {
 //     const details = {
