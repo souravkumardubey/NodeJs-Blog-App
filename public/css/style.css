@@ -288,13 +288,14 @@ img {
   padding: 0;
 }
 
-/* #searchClose {
+#searchClose {
   position: absolute;
   top: 0;
   right: 0;
   color: var(--grey-light);
   padding: 15px;
-} */
+  cursor: pointer;
+}
 
 /* Dashboard Admin */
 .admin-title {
