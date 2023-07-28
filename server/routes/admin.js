@@ -4,8 +4,27 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const auth = require("../../middlewares/auth");
 
 const adminLayout = "../views/layouts/admin";
+const jwtSecret = process.env.JWT_SECRET;
+
+/**
+ * auth middleware
+ */
+// const auth = (req, res, next) => {
+//   const token = req.cookies.token;
+//   if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+//   try {
+//     const decoded = jwt.verify(token, jwtSecret);
+//     req.userId = decoded.userId;
+//     next();
+//   } catch (err) {
+//     res.status(401).json({ message: "Unauthorized" });
+//   }
+// };
+
 /**
  * GET
  * Admin - Login
@@ -29,11 +48,28 @@ router.get("/admin", async (req, res) => {
 router.post("/admin", async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log(req.body);
-    // res.render("admin/index", { details, layout: adminLayout });
+    const user = await User.findOne({ username });
+    if (!user) return res.status(404).json({ message: "Invalid credentials" });
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!user) return res.status(404).json({ message: "Invalid credentials" });
+
+    const token = jwt.sign({ userId: user._id }, jwtSecret);
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
+    res.redirect("/dashboard");
   } catch (err) {
-    console.log(err);
+    return res.status(404).json({ message: "Invalid credentials" });
   }
+});
+
+router.get("/dashboard", auth, async (req, res) => {
+  const details = {
+    title: "Dashboard",
+    description: "My personal blog page.",
+  };
+  res.render("admin/dashboard", { details });
 });
 
 /**
