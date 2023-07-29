@@ -29,7 +29,7 @@ const jwtSecret = process.env.JWT_SECRET;
  * GET
  * Admin - Login
  */
-router.get("/admin/login", async (req, res) => {
+router.get("/admin", async (req, res) => {
   try {
     const details = {
       title: "Admin",
@@ -45,7 +45,7 @@ router.get("/admin/login", async (req, res) => {
  * POST
  * Admin - Login Step
  */
-router.post("/admin/login", async (req, res) => {
+router.post("/admin", async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
