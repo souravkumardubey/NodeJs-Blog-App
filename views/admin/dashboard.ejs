@@ -1,6 +1,6 @@
 <div class="admin-title">
-  <h2>Posts</h2>
-  <a href="/add-post" class="btn">+ Add New</a>
+  <h2>Your Blogs</h2>
+  <a href="/add-post" class="searchBtn">+ Add New</a>
 </div>
 <ul class="admin-posts">
   <% blogs.forEach(blog => { %>
@@ -8,7 +8,7 @@
     <a href="/post/<%= blog._id %>"><%= blog.title %> &nearr;</a>
     <div class="admin-post-controls">
       <a href="/edit-post/<%= blog._id %>" class="btn">Edit</a>
-      <form action="/delete-form/<%= blog._id %>?_method=DELETE" method="POST">
+      <form action="/delete-post/<%= blog._id %>?_method=DELETE" method="POST">
         <input type="submit" value="Delete" class="btn" />
       </form>
     </div>
