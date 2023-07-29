@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
       blogs,
       current: page,
       nextPage: hasNextPage ? nextPage : null,
+      currRoute: "/",
     });
   } catch (err) {
     console.log(err);
@@ -47,10 +48,22 @@ router.get("/post/:id", async (req, res) => {
       description: "My personal blogging website!",
     };
     console.log(post);
-    res.render("post", { details, post });
+    res.render("post", { details, post, currRoute: `/post/${req.params.id}` });
   } catch (err) {
     console.log(err);
   }
+});
+
+/**
+ * GET
+ * About page
+ */
+router.get("/about", async (req, res) => {
+  const details = {
+    title: "About Me",
+    description: "My personal blogging website!",
+  };
+  res.render("about", { details, currRoute: "/about" });
 });
 
 /**
@@ -73,7 +86,7 @@ router.post("/search", async (req, res) => {
         { body: { $regex: new RegExp(modifiedSearchTerm, "i") } },
       ],
     });
-    res.render("search", { details, blogs });
+    res.render("search", { details, blogs, currRoute: "/" });
     // res.send(searchTerm);
   } catch (err) {
     console.log(err);
