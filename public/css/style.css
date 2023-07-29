@@ -1,6 +1,7 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"); */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;800&display=swap"); */
 :root {
   --black: #1c1c1c;
   --grey: #7e7e7e;
@@ -72,7 +73,7 @@ img {
 }
 
 .container {
-  max-width: 982px;
+  max-width: 800px;
   margin: 0px auto;
   padding: 0px 10px;
 }
@@ -121,6 +122,36 @@ img {
   display: flex;
   justify-content: center;
 }
+/* 
+.header__logo,
+.header__nav,
+.header__button {
+  width: 100%;
+}
+
+.header__button {
+  display: flex;
+  justify-content: end;
+  grid-area: button;
+}
+
+.header__button button {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  border: 0;
+  padding: 6px 12px;
+  background: none;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--black);
+} */
+
+.header__button button:hover {
+  border: 2px solid var(--black);
+}
 
 .header__nav ul {
   list-style-type: none;
@@ -141,7 +172,7 @@ img {
 }
 
 .header__nav ul a.active {
-  color: var(--grey);
+  color: #7e7e7e;
 }
 
 .header__btn {
@@ -150,7 +181,7 @@ img {
   justify-content: end;
 }
 
-.header__btn .searchBtn {
+.searchBtn {
   display: flex;
   gap: 0.3rem;
   align-items: center;
@@ -164,7 +195,7 @@ img {
   color: var(--black);
 }
 
-.header__btn .searchBtn:hover {
+.searchBtn:hover {
   border: 1px solid var(--black);
   cursor: pointer;
 }
@@ -273,7 +304,7 @@ img {
   visibility: hidden;
   transform: translateY(-100px);
   background-color: var(--black);
-  padding: 4px 0px;
+  padding: 10px 0px;
   position: absolute;
   left: 0;
   right: 0;
@@ -285,8 +316,14 @@ img {
 }
 
 .searchBar input {
+  width: 500px;
   margin: 0;
   padding: 0;
+}
+
+.searchBar .container {
+  display: flex;
+  gap: 0.5rem;
 }
 
 #searchClose {
@@ -294,8 +331,10 @@ img {
   top: 0;
   right: 0;
   color: var(--grey-light);
-  padding: 15px;
+  /* padding: 15px; */
   cursor: pointer;
+  background-color: #1c1c1c;
+  color: whitesmoke;
 }
 
 /* Dashboard Admin */
@@ -308,6 +347,10 @@ img {
 .admin-posts {
   padding: 0;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .admin-post-controls form {
