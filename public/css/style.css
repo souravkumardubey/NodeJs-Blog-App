@@ -316,15 +316,15 @@ img {
 }
 
 .searchBar input {
-  width: 500px;
+  /* width: 500px; */
   margin: 0;
   padding: 0;
 }
-
+/* 
 .searchBar .container {
   display: flex;
   gap: 0.5rem;
-}
+} */
 
 #searchClose {
   position: absolute;
