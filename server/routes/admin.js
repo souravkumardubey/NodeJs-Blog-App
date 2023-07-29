@@ -35,7 +35,10 @@ router.get("/admin", async (req, res) => {
       title: "Admin",
       description: "My personal blogging website!",
     };
-    res.render("admin/index", { details, layout: adminLayout });
+    res.render("admin/index", {
+      details,
+      layout: adminLayout,
+    });
   } catch (err) {
     console.log(err);
   }
