@@ -29,7 +29,7 @@ const jwtSecret = process.env.JWT_SECRET;
  * GET
  * Admin - Login
  */
-router.get("/admin", async (req, res) => {
+router.get("/admin/login", async (req, res) => {
   try {
     const details = {
       title: "Admin",
@@ -45,7 +45,7 @@ router.get("/admin", async (req, res) => {
  * POST
  * Admin - Login Step
  */
-router.post("/admin", async (req, res) => {
+router.post("/admin/login", async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -62,14 +62,6 @@ router.post("/admin", async (req, res) => {
   } catch (err) {
     return res.status(404).json({ message: "Invalid credentials" });
   }
-});
-
-router.get("/dashboard", auth, async (req, res) => {
-  const details = {
-    title: "Dashboard",
-    description: "My personal blog page.",
-  };
-  res.render("admin/dashboard", { details });
 });
 
 /**
@@ -97,4 +89,139 @@ router.post("/register", async (req, res) => {
     console.log(err);
   }
 });
+
+/**
+ * GET
+ * Admin - Logout
+ */
+router.get("/logout", (req, res) => {
+  try {
+    const details = {
+      title: "Souav Dubey Blogs",
+      description: "My personal blogging website!",
+    };
+    res.clearCookie("token");
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * GET
+ * Admin - Dashboard
+ */
+router.get("/dashboard", auth, async (req, res) => {
+  const details = {
+    title: "Dashboard",
+    description: "My personal blog page.",
+  };
+  try {
+    const blogs = await Post.find();
+    res.render("admin/dashboard", { details, blogs, layout: adminLayout });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * GET
+ * ADD NEW BLOG
+ */
+router.get("/add-post", auth, async (req, res) => {
+  const details = {
+    title: "Add Post",
+    description: "My personal blog page.",
+  };
+  try {
+    const blogs = await Post.find();
+    res.render("admin/add-post", { details, blogs, layout: adminLayout });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * GET
+ * ADD NEW BLOG
+ */
+router.get("/add-post", auth, async (req, res) => {
+  const details = {
+    title: "Add Post",
+    description: "My personal blog page.",
+  };
+  try {
+    const blogs = await Post.find();
+    res.render("admin/add-post", { details, blogs, layout: adminLayout });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * POST
+ * Admin - Add New Blog
+ */
+router.post("/add-post", auth, async (req, res) => {
+  try {
+    res.redirect("/dashboard");
+    const newBlog = new Post({
+      title: req.body.title,
+      body: req.body.content,
+    });
+
+    await Post.create(newBlog);
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * GET
+ * Admin - Edit blog
+ */
+router.get("/edit-post/:id", auth, async (req, res) => {
+  try {
+    const details = {
+      title: "Edit Blog",
+      description: "My personal blog page.",
+    };
+    const blog = await Post.findById({ _id: req.params.id });
+    res.render(`admin/edit-post`, { details, blog, layout: adminLayout });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * PUT
+ * Admin - Edit blog
+ */
+router.put("/edit-post/:id", auth, async (req, res) => {
+  try {
+    await Post.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      body: req.body.content,
+      updatedOn: Date.now(),
+    });
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * DELETE
+ * Admin = Delete Blog
+ */
+router.delete("/delete-post/:id", auth, async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
