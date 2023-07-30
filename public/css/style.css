@@ -264,13 +264,18 @@ img {
   font-size: 24px;
   cursor: pointer;
   transition: filter 0.1s;
+  padding: 0px 10px;
 }
-
+/* 
 .blog-ul li:not(:last-child) {
   border-bottom: 1px solid var(--grey-light);
-}
+} */
 
 .blog-ul li:hover {
+  background-color: lightgoldenrodyellow;
+  border-radius: 1rem;
+}
+/* .blog-ul li:hover {
   filter: none;
 }
 
@@ -280,7 +285,7 @@ img {
 
 .blog-ul:hover li:hover {
   filter: none;
-}
+} */
 
 .pagination {
   font-size: 1.3rem;
