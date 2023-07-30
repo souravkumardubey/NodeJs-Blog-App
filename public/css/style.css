@@ -275,6 +275,17 @@ img {
   background-color: lightgoldenrodyellow;
   border-radius: 1rem;
 }
+
+.post-title {
+  margin-bottom: 1rem;
+}
+
+.article {
+  background-color: lightgoldenrodyellow;
+  padding: 0px 20px;
+  padding-top: 20px;
+  border-radius: 1rem;
+}
 /* .blog-ul li:hover {
   filter: none;
 }
