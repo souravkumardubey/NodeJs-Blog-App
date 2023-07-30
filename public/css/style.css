@@ -38,6 +38,10 @@ textarea {
   margin-bottom: 1rem;
 }
 
+textarea {
+  white-space: pre-wrap;
+}
+
 .btn {
   background-color: var(--black);
   border: none;
