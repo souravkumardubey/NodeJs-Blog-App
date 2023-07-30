@@ -35,6 +35,8 @@ router.get("/admin", async (req, res) => {
       title: "Admin",
       description: "My personal blogging website!",
     };
+    const token = req.cookies.token;
+    if (token) return res.redirect("/dashboard");
     res.render("admin/index", {
       details,
       layout: adminLayout,
