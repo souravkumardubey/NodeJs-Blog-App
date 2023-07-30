@@ -43,11 +43,11 @@ router.get("/post/:id", async (req, res) => {
   try {
     const post = await Post.findById({ _id: req.params.id });
     if (!post) return res.redirect("/"); // redirecting to home when id not found
+    post.body = post.body.replace(/\r?\n/g, "<br>");
     const details = {
       title: `${post.title}`,
       description: "My personal blogging website!",
     };
-    console.log(post);
     res.render("post", { details, post, currRoute: `/post/${req.params.id}` });
   } catch (err) {
     console.log(err);
