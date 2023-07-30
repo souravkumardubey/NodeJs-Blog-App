@@ -20,7 +20,7 @@ app.use(methodOverride("_method"));
 
 app.use(
   session({
-    secret: "secretkey1234",
+    secret: `${process.env.SESSION_SECRET_KEY}`,
     resave: false,
     saveUninitialized: true,
     store: mongoStore.create({
