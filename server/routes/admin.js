@@ -169,7 +169,6 @@ router.get("/add-post", auth, async (req, res) => {
  */
 router.post("/add-post", auth, async (req, res) => {
   try {
-    res.redirect("/dashboard");
     const newBlog = new Post({
       title: req.body.title,
       body: req.body.content,
